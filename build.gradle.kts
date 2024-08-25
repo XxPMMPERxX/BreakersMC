@@ -12,7 +12,14 @@ repositories {
 }
 
 dependencies {
+    compileOnly(kotlin("stdlib"))
+    compileOnly("org.jetbrains.exposed:exposed-core:0.53.0")
+    compileOnly("org.jetbrains.exposed:exposed-jdbc:0.53.0")
+    compileOnly("org.jetbrains.exposed:exposed-dao:0.53.0")
+    compileOnly("com.mysql:mysql-connector-j:9.0.0")
+
     compileOnly("io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT")
+
     testImplementation(kotlin("test"))
 }
 
