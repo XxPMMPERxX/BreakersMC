@@ -7,6 +7,7 @@ class Account(
     val uuid: UUID,
     var name: Name,
     var money: Money,
-    var level: Level
-) {
-}
+    var level: Level,
+    var killCount: UInt,
+    var deathCount: UInt
+)
