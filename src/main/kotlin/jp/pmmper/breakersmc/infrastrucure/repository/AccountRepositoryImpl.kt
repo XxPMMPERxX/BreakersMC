@@ -66,7 +66,6 @@ class AccountRepositoryImpl(private val connection: Connection) : AccountReposit
             stmt.setInt(1, id.value.toInt())
             val result = stmt.executeQuery()
             result.first()
-            result.getInt("id")
             account = Account(
                 AccountID(result.getInt("id").toUInt()),
                 UUID.fromString(result.getString("uuid")),
