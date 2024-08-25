@@ -5,9 +5,9 @@ import jp.pmmper.breakersmc.domain.game.GameID
 import java.time.ZonedDateTime
 
 class DeathHistory(
-    val account: AccountID,
+    val dead: AccountID,
     val game: GameID,
     val message: Reason,
     val killer: AccountID?,
-    val dateTime: ZonedDateTime
+    val datetime: ZonedDateTime
 )
