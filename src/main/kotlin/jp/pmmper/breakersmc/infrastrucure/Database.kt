@@ -11,7 +11,7 @@ object Database {
 
     fun connect(): Connection {
         if (connection == null || connection?.isClosed == true) {
-            connection = DriverManager.getConnection(url, id, password);
+            connection = DriverManager.getConnection(url, id, password)
         }
         return connection as Connection
     }

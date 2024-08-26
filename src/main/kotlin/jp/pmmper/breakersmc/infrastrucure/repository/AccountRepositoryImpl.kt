@@ -67,13 +67,13 @@ class AccountRepositoryImpl(private val connection: Connection) : AccountReposit
             val result = stmt.executeQuery()
             result.first()
             account = Account(
-                AccountID(result.getInt("id").toUInt()),
+                AccountID(result.getInt("id")),
                 UUID.fromString(result.getString("uuid")),
                 Name(result.getString("name")),
-                Money(result.getInt("money").toUInt()),
+                Money(result.getInt("money")),
                 Level(result.getDouble("level")),
-                result.getInt("kill_count").toUInt(),
-                result.getInt("death_count").toUInt()
+                result.getInt("kill_count"),
+                result.getInt("death_count")
             )
         }
 

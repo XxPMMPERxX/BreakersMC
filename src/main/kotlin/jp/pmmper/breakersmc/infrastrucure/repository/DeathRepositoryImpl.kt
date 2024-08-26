@@ -37,10 +37,10 @@ class DeathRepositoryImpl(private val connection: Connection) : DeathHistoryRepo
             while (result.next()) {
                 list.add(
                     DeathHistory(
-                        AccountID(result.getInt("dead").toUInt()),
-                        GameID(result.getInt("game").toUInt()),
+                        AccountID(result.getInt("dead")),
+                        GameID(result.getInt("game")),
                         Reason(result.getString("message")),
-                        if (result.getInt("killer") != 0) AccountID(result.getInt("killer").toUInt()) else null,
+                        if (result.getInt("killer") != 0) AccountID(result.getInt("killer")) else null,
                         result.getTimestamp("created_at").toLocalDateTime()
                     )
                 )
@@ -61,10 +61,10 @@ class DeathRepositoryImpl(private val connection: Connection) : DeathHistoryRepo
             while (result.next()) {
                 list.add(
                     DeathHistory(
-                        AccountID(result.getInt("dead").toUInt()),
-                        GameID(result.getInt("game").toUInt()),
+                        AccountID(result.getInt("dead")),
+                        GameID(result.getInt("game")),
                         Reason(result.getString("message")),
-                        if (result.getInt("killer") != 0) AccountID(result.getInt("killer").toUInt()) else null,
+                        if (result.getInt("killer") != 0) AccountID(result.getInt("killer")) else null,
                         result.getTimestamp("created_at").toLocalDateTime()
                     )
                 )

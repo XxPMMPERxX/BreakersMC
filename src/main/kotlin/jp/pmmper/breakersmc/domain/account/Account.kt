@@ -8,6 +8,6 @@ class Account(
     var name: Name,
     var money: Money,
     var level: Level,
-    var killCount: UInt,
-    var deathCount: UInt
+    var killCount: Int,
+    var deathCount: Int
 )
