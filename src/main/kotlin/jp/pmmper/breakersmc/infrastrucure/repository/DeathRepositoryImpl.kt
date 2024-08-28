@@ -77,9 +77,9 @@ class DeathRepositoryImpl(private val connection: Connection) : DeathHistoryRepo
     override fun store(history: DeathHistory) {
         val stmt = connection.prepareStatement(INSERT_QUERY)
         stmt.use {
-            stmt.setInt(1, history.dead.value.toInt())
-            stmt.setInt(2, history.game.value.toInt())
-            stmt.setString(3, history.message.value)
+            stmt.setInt(1, history.dead.value)
+            stmt.setInt(2, history.game.value)
+            stmt.setString(3, history.message?.value)
             if (history.killer != null) stmt.setInt(4, history.killer.value.toInt()) else stmt.setNull(4, Types.NULL)
 
             stmt.execute()
