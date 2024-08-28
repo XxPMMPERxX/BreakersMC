@@ -7,7 +7,7 @@ import java.time.LocalDateTime
 class DeathHistory(
     val dead: AccountID,
     val game: GameID,
-    val message: Reason,
+    val message: Reason?,
     val killer: AccountID?,
     val datetime: LocalDateTime
 )

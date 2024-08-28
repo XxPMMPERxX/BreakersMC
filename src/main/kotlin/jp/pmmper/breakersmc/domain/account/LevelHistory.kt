@@ -7,6 +7,6 @@ data class LevelHistory(
     val account: AccountID,
     val oldLevel: Level,
     val newLevel: Level,
-    val reason: Reason,
+    val reason: Reason?,
     val datetime: LocalDateTime
 )

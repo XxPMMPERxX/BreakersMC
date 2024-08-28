@@ -7,6 +7,6 @@ data class MoneyHistory(
     val account: AccountID,
     val oldMoney: Money,
     val newMoney: Money,
-    val reason: Reason,
+    val reason: Reason?,
     val datetime: LocalDateTime
 )
