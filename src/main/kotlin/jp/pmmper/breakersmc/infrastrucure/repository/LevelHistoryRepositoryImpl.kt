@@ -56,7 +56,7 @@ class LevelHistoryRepositoryImpl(private val connection: Connection) : LevelHist
         stmt.use {
             val result = stmt.executeQuery()
             result.first()
-            return Level(result.getDouble("level"))
+            return Level(result.getDouble("new_level"))
         }
     }
 

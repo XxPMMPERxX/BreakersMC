@@ -56,7 +56,7 @@ class MoneyHistoryRepositoryImpl(private val connection: Connection) : MoneyHist
         stmt.use {
             val result = stmt.executeQuery()
             result.first()
-            return Money(result.getInt("money"))
+            return Money(result.getInt("new_money"))
         }
     }
 
