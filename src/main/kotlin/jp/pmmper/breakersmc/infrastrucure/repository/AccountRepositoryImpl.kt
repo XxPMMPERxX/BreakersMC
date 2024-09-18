@@ -63,7 +63,7 @@ class AccountRepositoryImpl(private val connection: Connection) : AccountReposit
 
         val stmt = connection.prepareStatement(SELECT_QUERY)
         stmt.use {
-            stmt.setInt(1, id.value.toInt())
+            stmt.setInt(1, id.value)
             val result = stmt.executeQuery()
             result.first()
             account = Account(

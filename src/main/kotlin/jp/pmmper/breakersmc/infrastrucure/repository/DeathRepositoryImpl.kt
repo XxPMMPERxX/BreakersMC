@@ -31,7 +31,7 @@ class DeathRepositoryImpl(private val connection: Connection) : DeathHistoryRepo
 
         val stmt = connection.prepareStatement(SELECT_DEATH_QUERY)
         stmt.use {
-            stmt.setInt(1, account.value.toInt())
+            stmt.setInt(1, account.value)
             val result = stmt.executeQuery()
 
             while (result.next()) {
@@ -55,7 +55,7 @@ class DeathRepositoryImpl(private val connection: Connection) : DeathHistoryRepo
 
         val stmt = connection.prepareStatement(SELECT_KILL_QUERY)
         stmt.use {
-            stmt.setInt(1, account.value.toInt())
+            stmt.setInt(1, account.value)
             val result = stmt.executeQuery()
 
             while (result.next()) {
@@ -80,7 +80,7 @@ class DeathRepositoryImpl(private val connection: Connection) : DeathHistoryRepo
             stmt.setInt(1, history.dead.value)
             stmt.setInt(2, history.game.value)
             stmt.setString(3, history.message?.value)
-            if (history.killer != null) stmt.setInt(4, history.killer.value.toInt()) else stmt.setNull(4, Types.NULL)
+            if (history.killer != null) stmt.setInt(4, history.killer.value) else stmt.setNull(4, Types.NULL)
 
             stmt.execute()
         }
