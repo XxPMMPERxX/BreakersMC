@@ -1,4 +1,4 @@
-package jp.pmmper.breakersmc.domain.game
+package jp.pmmper.breakersmc.game
 
 data class GameID(val value: Int) {
     init {

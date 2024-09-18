@@ -1,6 +1,9 @@
-package jp.pmmper.breakersmc.domain.account
+package jp.pmmper.breakersmc.database
 
-interface DeathHistoryRepository {
+import jp.pmmper.breakersmc.account.AccountID
+import jp.pmmper.breakersmc.history.DeathHistory
+
+interface DeathHistoryProvider {
     fun findDeathHistory(account: AccountID): List<DeathHistory>
 
     fun findKillHistory(account: AccountID): List<DeathHistory>

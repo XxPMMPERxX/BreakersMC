@@ -1,4 +1,4 @@
-package jp.pmmper.breakersmc.domain
+package jp.pmmper.breakersmc.history
 
 data class Reason(val value: String) {
     init {

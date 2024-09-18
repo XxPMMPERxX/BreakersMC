@@ -1,4 +1,4 @@
-package jp.pmmper.breakersmc.domain.account
+package jp.pmmper.breakersmc.account
 
 data class Name(val value: String) {
     init {

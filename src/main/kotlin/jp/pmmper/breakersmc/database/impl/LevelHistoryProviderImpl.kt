@@ -1,20 +1,20 @@
-package jp.pmmper.breakersmc.infrastrucure.repository
+package jp.pmmper.breakersmc.database.impl
 
-import jp.pmmper.breakersmc.domain.Reason
-import jp.pmmper.breakersmc.domain.account.AccountID
-import jp.pmmper.breakersmc.domain.account.Level
-import jp.pmmper.breakersmc.domain.account.LevelHistory
-import jp.pmmper.breakersmc.domain.account.LevelHistoryRepository
+import jp.pmmper.breakersmc.account.AccountID
+import jp.pmmper.breakersmc.account.Level
+import jp.pmmper.breakersmc.database.LevelHistoryProvider
+import jp.pmmper.breakersmc.history.LevelHistory
+import jp.pmmper.breakersmc.history.Reason
 import java.sql.Connection
 
-class LevelHistoryRepositoryImpl(private val connection: Connection) : LevelHistoryRepository {
+class LevelHistoryProviderImpl(private val connection: Connection) : LevelHistoryProvider {
     companion object {
         private const val SELECT_QUERY = """
             SELECT * FROM level_histories
             WHERE player = ?
         """
 
-        private const val LATEST_LEVEL_QUERY = """
+        private const val SELECT_LATEST_LEVEL_QUERY = """
             SELECT new_level FROM level_histories
             WHERE player = ?
             ORDER BY id DESC
@@ -52,7 +52,7 @@ class LevelHistoryRepositoryImpl(private val connection: Connection) : LevelHist
     }
 
     override fun findLatestLevel(account: AccountID): Level {
-        val stmt = connection.prepareStatement(LATEST_LEVEL_QUERY)
+        val stmt = connection.prepareStatement(SELECT_LATEST_LEVEL_QUERY)
         stmt.use {
             val result = stmt.executeQuery()
             result.first()

@@ -1,7 +1,7 @@
-package jp.pmmper.breakersmc.domain.account
+package jp.pmmper.breakersmc.history
 
-import jp.pmmper.breakersmc.domain.Reason
-import jp.pmmper.breakersmc.domain.game.GameID
+import jp.pmmper.breakersmc.account.AccountID
+import jp.pmmper.breakersmc.game.GameID
 import java.time.LocalDateTime
 
 class DeathHistory(

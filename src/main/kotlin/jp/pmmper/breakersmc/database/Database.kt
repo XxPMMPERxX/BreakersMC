@@ -1,4 +1,4 @@
-package jp.pmmper.breakersmc.infrastrucure
+package jp.pmmper.breakersmc.database
 
 import java.sql.Connection
 import java.sql.DriverManager

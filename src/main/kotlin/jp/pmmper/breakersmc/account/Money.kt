@@ -1,4 +1,4 @@
-package jp.pmmper.breakersmc.domain.account
+package jp.pmmper.breakersmc.account
 
 data class Money(val value: Int) {
     companion object {

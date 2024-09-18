@@ -1,14 +1,14 @@
-package jp.pmmper.breakersmc.infrastrucure.repository
+package jp.pmmper.breakersmc.database.impl
 
-import jp.pmmper.breakersmc.domain.Reason
-import jp.pmmper.breakersmc.domain.account.AccountID
-import jp.pmmper.breakersmc.domain.account.DeathHistory
-import jp.pmmper.breakersmc.domain.account.DeathHistoryRepository
-import jp.pmmper.breakersmc.domain.game.GameID
+import jp.pmmper.breakersmc.account.AccountID
+import jp.pmmper.breakersmc.database.DeathHistoryProvider
+import jp.pmmper.breakersmc.game.GameID
+import jp.pmmper.breakersmc.history.DeathHistory
+import jp.pmmper.breakersmc.history.Reason
 import java.sql.Connection
 import java.sql.Types
 
-class DeathRepositoryImpl(private val connection: Connection) : DeathHistoryRepository {
+class DeathHistoryProviderImpl(private val connection: Connection) : DeathHistoryProvider {
     companion object {
         private const val SELECT_DEATH_QUERY = """
             SELECT * FROM death_histories

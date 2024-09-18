@@ -1,19 +1,19 @@
-package jp.pmmper.breakersmc.infrastrucure.repository
+package jp.pmmper.breakersmc.database.impl
 
-import jp.pmmper.breakersmc.domain.account.AccountID
-import jp.pmmper.breakersmc.domain.account.Name
-import jp.pmmper.breakersmc.domain.account.NameHistory
-import jp.pmmper.breakersmc.domain.account.NameHistoryRepository
+import jp.pmmper.breakersmc.account.AccountID
+import jp.pmmper.breakersmc.account.Name
+import jp.pmmper.breakersmc.database.NameHistoryProvider
+import jp.pmmper.breakersmc.history.NameHistory
 import java.sql.Connection
 
-class NameHistoryRepositoryImpl(private val connection: Connection) : NameHistoryRepository {
+class NameHistoryProviderImpl(private val connection: Connection) : NameHistoryProvider {
     companion object {
         private const val SELECT_QUERY = """
             SELECT * FROM name_histories
             WHERE player = ?
         """
 
-        private const val LATEST_NAME_QUERY = """
+        private const val SELECT_LATEST_NAME_QUERY = """
             SELECT new_name FROM name_histories
             WHERE player = ?
             ORDER BY id DESC
@@ -50,7 +50,7 @@ class NameHistoryRepositoryImpl(private val connection: Connection) : NameHistor
     }
 
     override fun findLatestName(account: AccountID): Name {
-        val stmt = connection.prepareStatement(LATEST_NAME_QUERY)
+        val stmt = connection.prepareStatement(SELECT_LATEST_NAME_QUERY)
         stmt.use {
             val result = stmt.executeQuery()
             result.first()

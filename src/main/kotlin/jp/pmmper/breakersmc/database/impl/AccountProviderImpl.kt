@@ -1,10 +1,11 @@
-package jp.pmmper.breakersmc.infrastrucure.repository
+package jp.pmmper.breakersmc.database.impl
 
-import jp.pmmper.breakersmc.domain.account.*
+import jp.pmmper.breakersmc.account.*
+import jp.pmmper.breakersmc.database.AccountProvider
 import java.sql.Connection
 import java.util.*
 
-class AccountRepositoryImpl(private val connection: Connection) : AccountRepository {
+class AccountProviderImpl(private val connection: Connection) : AccountProvider {
     companion object {
         private const val SELECT_QUERY = """
             SELECT

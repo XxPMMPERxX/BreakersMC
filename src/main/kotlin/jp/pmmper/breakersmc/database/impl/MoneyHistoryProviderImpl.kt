@@ -1,20 +1,20 @@
-package jp.pmmper.breakersmc.infrastrucure.repository
+package jp.pmmper.breakersmc.database.impl
 
-import jp.pmmper.breakersmc.domain.Reason
-import jp.pmmper.breakersmc.domain.account.AccountID
-import jp.pmmper.breakersmc.domain.account.Money
-import jp.pmmper.breakersmc.domain.account.MoneyHistory
-import jp.pmmper.breakersmc.domain.account.MoneyHistoryRepository
+import jp.pmmper.breakersmc.account.AccountID
+import jp.pmmper.breakersmc.account.Money
+import jp.pmmper.breakersmc.database.MoneyHistoryProvider
+import jp.pmmper.breakersmc.history.MoneyHistory
+import jp.pmmper.breakersmc.history.Reason
 import java.sql.Connection
 
-class MoneyHistoryRepositoryImpl(private val connection: Connection) : MoneyHistoryRepository {
+class MoneyHistoryProviderImpl(private val connection: Connection) : MoneyHistoryProvider {
     companion object {
         private const val SELECT_QUERY = """
             SELECT * FROM money_histories
             WHERE player = ?
         """
 
-        private const val LATEST_MONEY_QUERY = """
+        private const val SELECT_LATEST_MONEY_QUERY = """
             SELECT new_money FROM money_histories
             WHERE player = ?
             ORDER BY id DESC
@@ -52,7 +52,7 @@ class MoneyHistoryRepositoryImpl(private val connection: Connection) : MoneyHist
     }
 
     override fun findLatestMoney(account: AccountID): Money {
-        val stmt = connection.prepareStatement(LATEST_MONEY_QUERY)
+        val stmt = connection.prepareStatement(SELECT_LATEST_MONEY_QUERY)
         stmt.use {
             val result = stmt.executeQuery()
             result.first()
