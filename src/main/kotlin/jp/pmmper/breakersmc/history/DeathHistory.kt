@@ -4,7 +4,7 @@ import jp.pmmper.breakersmc.account.AccountID
 import jp.pmmper.breakersmc.game.GameID
 import java.time.LocalDateTime
 
-class DeathHistory(
+data class DeathHistory(
     val dead: AccountID,
     val game: GameID,
     val message: Reason?,
