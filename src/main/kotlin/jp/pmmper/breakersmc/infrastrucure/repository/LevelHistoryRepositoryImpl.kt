@@ -15,7 +15,7 @@ class LevelHistoryRepositoryImpl(private val connection: Connection) : LevelHist
         """
 
         private const val LATEST_LEVEL_QUERY = """
-            SELECT level FROM level_histories
+            SELECT new_level FROM level_histories
             WHERE player = ?
             ORDER BY id DESC
             LIMIT 1

@@ -15,7 +15,7 @@ class MoneyHistoryRepositoryImpl(private val connection: Connection) : MoneyHist
         """
 
         private const val LATEST_MONEY_QUERY = """
-            SELECT money FROM money_histories
+            SELECT new_money FROM money_histories
             WHERE player = ?
             ORDER BY id DESC
             LIMIT 1
