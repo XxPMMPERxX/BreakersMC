@@ -89,33 +89,33 @@ abstract class Game(id: GameID) {
      *
      * @return
      */
-    abstract fun onRecruiting(): Boolean
+    protected abstract fun onRecruiting(): Boolean
 
     /**
      * ゲーム準備段階
      *
      * @return
      */
-    abstract fun onPrepare(): Boolean
+    protected abstract fun onPrepare(): Boolean
 
     /**
      * ゲーム開始時
      *
      * @return
      */
-    abstract fun onBegin(): Boolean
+    protected abstract fun onBegin(): Boolean
 
     /**
      * ゲーム終了時
      *
      * @return
      */
-    abstract fun onEnd(): Boolean
+    protected abstract fun onEnd(): Boolean
 
     /**
      * ゲームセッション閉じる時
      *
      * @return
      */
-    abstract fun onClose(): Boolean
+    protected abstract fun onClose(): Boolean
 }
