@@ -9,9 +9,9 @@ abstract class Game(id: GameID) {
     val id: GameID = id
     val players = mutableListOf<Player>()
     var beginAt: LocalDateTime? = null
-        private set
+        protected set
     var endedAt: LocalDateTime? = null
-        private set
+        protected set
     var phase = Phase.CLOSE
         private set
 
