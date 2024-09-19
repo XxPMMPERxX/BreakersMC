@@ -1,5 +1,7 @@
 package jp.pmmper.breakersmc.game
 
+import jp.pmmper.breakersmc.event.PhaseChangingEvent
+import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import java.time.LocalDateTime
 
@@ -52,70 +54,27 @@ abstract class Game(id: GameID) {
     /**
      * 次フェーズに移行
      *
+     * @return 移行できたか
      */
-    fun next() {
-        when (phase) {
-            Phase.CLOSE -> {
-                onRecruiting()
-                phase = Phase.RECRUITING
-            }
-
-            Phase.RECRUITING -> {
-                onPrepare()
-                phase = Phase.PREPARE
-            }
-
-            Phase.PREPARE -> {
-                onBegin()
-                phase = Phase.IN_GAME
-                beginAt = LocalDateTime.now()
-            }
-
-            Phase.IN_GAME -> {
-                onEnd()
-                phase = Phase.FINISHED
-                endedAt = LocalDateTime.now()
-            }
-
-            Phase.FINISHED -> {
-                onClose()
-                phase = Phase.CLOSE
-            }
+    fun next(): Boolean {
+        val nextPhase = when (phase) {
+            Phase.CLOSE -> Phase.RECRUITING
+            Phase.RECRUITING -> Phase.PREPARE
+            Phase.PREPARE -> Phase.IN_GAME
+            Phase.IN_GAME -> Phase.FINISHED
+            Phase.FINISHED -> Phase.CLOSE
         }
+
+        // フェーズ切替イベント呼び出し
+        val event = PhaseChangingEvent(phase, nextPhase)
+        Bukkit.getPluginManager().callEvent(event)
+        val isCancelled = event.isCancelled
+
+        // イベントがキャンセルされなかった場合、次フェーズに移行
+        if (!isCancelled) {
+            phase = nextPhase
+        }
+
+        return isCancelled
     }
-
-    /**
-     * プレイヤー募集段階
-     *
-     * @return
-     */
-    protected abstract fun onRecruiting(): Boolean
-
-    /**
-     * ゲーム準備段階
-     *
-     * @return
-     */
-    protected abstract fun onPrepare(): Boolean
-
-    /**
-     * ゲーム開始時
-     *
-     * @return
-     */
-    protected abstract fun onBegin(): Boolean
-
-    /**
-     * ゲーム終了時
-     *
-     * @return
-     */
-    protected abstract fun onEnd(): Boolean
-
-    /**
-     * ゲームセッション閉じる時
-     *
-     * @return
-     */
-    protected abstract fun onClose(): Boolean
 }
