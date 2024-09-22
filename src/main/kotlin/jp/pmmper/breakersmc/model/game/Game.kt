@@ -1,6 +1,6 @@
 package jp.pmmper.breakersmc.model.game
 
-import jp.pmmper.breakersmc.model.event.PhaseChanged
+import jp.pmmper.breakersmc.model.game.event.PhaseChanged
 import java.time.LocalDateTime
 
 abstract class Game(id: GameID) {

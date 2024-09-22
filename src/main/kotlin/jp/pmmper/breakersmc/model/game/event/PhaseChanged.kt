@@ -1,4 +1,4 @@
-package jp.pmmper.breakersmc.model.event
+package jp.pmmper.breakersmc.model.game.event
 
 import jp.pmmper.breakersmc.model.game.Game
 import jp.pmmper.breakersmc.model.game.Phase
