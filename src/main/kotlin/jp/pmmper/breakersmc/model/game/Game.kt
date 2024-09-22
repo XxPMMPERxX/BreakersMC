@@ -26,6 +26,7 @@ abstract class Game(id: GameID) {
             Phase.FINISHED -> Phase.CLOSE
         }
 
+        phase = nextPhase
         return PhaseChanged(this, nextPhase)
     }
 }
