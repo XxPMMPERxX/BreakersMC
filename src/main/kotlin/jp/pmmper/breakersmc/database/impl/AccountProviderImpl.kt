@@ -7,6 +7,10 @@ import java.util.*
 
 class AccountProviderImpl(private val connection: Connection) : AccountProvider {
     companion object {
+        private const val SELECT_ID_QUERY = """
+            SELECT id FROM accounts WHERE uuid = ?
+        """
+
         private const val SELECT_QUERY = """
             SELECT
                 player.id                AS id,
@@ -16,15 +20,15 @@ class AccountProviderImpl(private val connection: Connection) : AccountProvider 
                 latest_level.level       AS level,
                 COUNT(DISTINCT death.id) AS death_count,
                 COUNT(DISTINCT kill.id)  AS kill_count
-            FROM                         AS player
+            FROM                         AS accounts
             
             -- プレイヤーの最新の名前を取得
             INNER JOIN (
                 SELECT
-                    name.player   AS player,
-                    name.new_name AS name
+                    name.account    AS account,
+                    name.new_name   AS name
                 FROM name_histories AS name
-                WHERE name.player = player.id
+                WHERE name.account = accounts.id
                 ORDER BY id DESC
                 LIMIT 1
             ) AS latest_name
@@ -32,10 +36,10 @@ class AccountProviderImpl(private val connection: Connection) : AccountProvider 
             -- プレイヤーの最新の所持金を取得
             INNER JOIN (
                 SELECT
-                    money.player    AS player,
-                    money.new_money AS money
+                    money.account    AS account,
+                    money.new_money  AS money
                 FROM money_histories AS money
-                WHERE money.player = player.id
+                WHERE money.account = accounts.id
                 ORDER BY id DESC
                 LIMIT 1
             ) AS latest_money
@@ -43,41 +47,54 @@ class AccountProviderImpl(private val connection: Connection) : AccountProvider 
             -- プレイヤーの最新のレベルを取得
             INNER JOIN (
                 SELECT
-                    level.player    AS player,
-                    level.new_level AS level
+                    level.account    AS account,
+                    level.new_level  AS level
                 FROM level_histories AS level
-                WHERE level.player = player.id
+                WHERE level.account = accounts.id
                 ORDER BY id DESC
                 LIMIT 1
             ) AS latest_level
             
-            INNER JOIN death_histories AS death ON death.dead  = player.id
-            INNER JOIN death_histories AS kill  ON kill.killer = player.id
+            INNER JOIN death_histories AS death ON death.dead  = accounts.id
+            INNER JOIN death_histories AS kill  ON kill.killer = accounts.id
             
-            WHERE player.id = ?
+            WHERE accounts.id = ?
             LIMIT 1;
         """
     }
 
     override fun find(id: AccountID): Account? {
-        var account: Account?
+        var account: Account? = null
 
         val stmt = connection.prepareStatement(SELECT_QUERY)
         stmt.use {
             stmt.setInt(1, id.value)
             val result = stmt.executeQuery()
-            result.first()
-            account = Account(
-                AccountID(result.getInt("id")),
-                UUID.fromString(result.getString("uuid")),
-                Name(result.getString("name")),
-                Money(result.getInt("money")),
-                Level(result.getDouble("level")),
-                result.getInt("kill_count"),
-                result.getInt("death_count")
-            )
+            if (result.first()) {
+                account = Account(
+                    AccountID(result.getInt("id")),
+                    UUID.fromString(result.getString("uuid")),
+                    Name(result.getString("name")),
+                    Money(result.getInt("money")),
+                    Level(result.getDouble("level")),
+                    result.getInt("kill_count"),
+                    result.getInt("death_count")
+                )
+            }
         }
 
         return account
+    }
+
+    override fun findIDByUUID(uuid: UUID): AccountID? {
+        val stmt = connection.prepareStatement(SELECT_ID_QUERY)
+        stmt.use {
+            stmt.setObject(1, uuid)
+            val result = stmt.executeQuery()
+            if (result.first()) {
+                return AccountID(result.getInt("id"))
+            }
+        }
+        return null
     }
 }
