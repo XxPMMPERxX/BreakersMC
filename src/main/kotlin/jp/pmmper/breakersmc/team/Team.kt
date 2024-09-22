@@ -5,7 +5,7 @@ import org.bukkit.entity.Player
 class Team(id: TeamID, name: Name) {
     val id: TeamID = id
     val name: Name = name
-    val players = mutableListOf<Player>()
+    private val players = mutableListOf<Player>()
 
     /**
      * プレイヤーがチームに参加しているか
@@ -37,5 +37,14 @@ class Team(id: TeamID, name: Name) {
     fun kickPlayer(player: Player): Boolean {
         if (!isPlayerJoined(player)) return false
         return players.remove(player)
+    }
+
+    /**
+     * プレイヤー数を取得
+     *
+     * @return
+     */
+    fun count(): Int {
+        return players.count()
     }
 }
