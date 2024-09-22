@@ -10,11 +10,11 @@ class TeamWithHP(id: TeamID, name: Name, point: HitPoint) : Team(id, name) {
     var point = point
         private set
 
-    fun increase(amount: HitPoint) {
+    fun increaseHitPoint(amount: HitPoint) {
         point = HitPoint(point.value + amount.value)
     }
 
-    fun decrease(amount: HitPoint) {
+    fun decreaseHitPoint(amount: HitPoint) {
         point = HitPoint(point.value - amount.value)
     }
 }
