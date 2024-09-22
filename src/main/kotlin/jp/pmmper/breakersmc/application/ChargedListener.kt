@@ -15,11 +15,19 @@ class ChargedListener : Listener {
         val to = event.to
         val amount = event.amount
 
-        // 請求元が金額を受け取れる状態にない または 請求先が支払える状態にない 場合は処理終了
-        if (!from.canCredited(amount) || !to.canPay(amount)) return
+        // 支払ができない場合は処理終了
+        try {
+            Bukkit.getPluginManager().callEvent(to.pay(amount))
+        } catch (e: IllegalArgumentException) {
+            return
+        }
 
-        // 請求先は支払う 請求元は受け取る（ログ保存処理等はPaidListener/CreditedListenerに任せる）
-        Bukkit.getPluginManager().callEvent(to.pay(amount))
-        Bukkit.getPluginManager().callEvent(from.credited(amount))
+        // 受取ができない場合は戻して処理終了（ログの保存はCreditedListener/PaidListenerに任せる）
+        try {
+            Bukkit.getPluginManager().callEvent(from.credited(amount))
+        } catch (e: IllegalArgumentException) {
+            to.credited(amount)
+            return
+        }
     }
 }

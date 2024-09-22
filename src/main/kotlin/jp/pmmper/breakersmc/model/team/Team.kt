@@ -35,7 +35,6 @@ open class Team(id: TeamID, name: Name) {
      */
     fun joinPlayer(player: Player): PlayerJoined {
         check(!isPlayerJoined(player))
-        players.add(player)
-        return PlayerJoined(this, player)
+        return PlayerJoined(player, this)
     }
 }

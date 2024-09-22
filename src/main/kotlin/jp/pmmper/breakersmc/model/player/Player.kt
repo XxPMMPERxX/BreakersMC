@@ -2,6 +2,7 @@ package jp.pmmper.breakersmc.model.player
 
 import jp.pmmper.breakersmc.model.player.event.PlayerCharged
 import jp.pmmper.breakersmc.model.player.event.PlayerCredited
+import jp.pmmper.breakersmc.model.player.event.PlayerNameChanged
 import jp.pmmper.breakersmc.model.player.event.PlayerPaid
 import java.util.*
 
@@ -9,10 +10,22 @@ class Player(id: PlayerID, uuid: UUID, name: Name, money: Money, level: Level) {
     val id = id
     val uuid = uuid
     var name = name
+        private set
     var money = money
         private set
     var level = level
         private set
+
+    /**
+     * 名前を変更する
+     *
+     * @param name
+     * @return
+     */
+    fun changeName(name: Name): PlayerNameChanged {
+        this.name = name
+        return PlayerNameChanged(this, name)
+    }
 
     /**
      * 請求する
@@ -29,9 +42,9 @@ class Player(id: PlayerID, uuid: UUID, name: Name, money: Money, level: Level) {
      * お金を受け取る
      *
      * @param amount
+     * @return
      */
     fun credited(amount: Money): PlayerCredited {
-        check(canCredited(amount))
         money = Money(money.value + amount.value)
         return PlayerCredited(this, amount)
     }
@@ -40,40 +53,10 @@ class Player(id: PlayerID, uuid: UUID, name: Name, money: Money, level: Level) {
      * お金を支払う
      *
      * @param amount 金額
+     * @return
      */
     fun pay(amount: Money): PlayerPaid {
-        check(canPay(amount))
         money = Money(money.value - amount.value)
         return PlayerPaid(this, amount)
-    }
-
-    /**
-     * 指定した金額を受け取れるか
-     *
-     * @param amount 金額
-     * @return
-     */
-    fun canCredited(amount: Money): Boolean {
-        try {
-            Money(money.value + amount.value)
-        } catch (e: IllegalArgumentException) {
-            return false
-        }
-        return true
-    }
-
-    /**
-     * 指定した金額を支払えるか
-     *
-     * @param amount
-     * @return
-     */
-    fun canPay(amount: Money): Boolean {
-        try {
-            Money(money.value - amount.value)
-        } catch (e: IllegalArgumentException) {
-            return false
-        }
-        return true
     }
 }

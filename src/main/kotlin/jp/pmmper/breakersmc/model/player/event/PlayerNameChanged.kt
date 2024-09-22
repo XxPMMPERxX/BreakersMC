@@ -1,11 +1,11 @@
-package jp.pmmper.breakersmc.model.team.event
+package jp.pmmper.breakersmc.model.player.event
 
+import jp.pmmper.breakersmc.model.player.Name
 import jp.pmmper.breakersmc.model.player.Player
-import jp.pmmper.breakersmc.model.team.Team
 import org.bukkit.event.Event
 import org.bukkit.event.HandlerList
 
-class PlayerJoined(val player: Player, val team: Team) : Event() {
+class PlayerNameChanged(val player: Player, val name: Name) : Event() {
     companion object {
         private val handlers = HandlerList()
 
