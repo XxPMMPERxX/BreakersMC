@@ -12,7 +12,7 @@ open class Team(id: TeamID, name: Name) {
      *
      * @return
      */
-    fun getPlayers(): List<Account> {
+    fun getAccounts(): List<Account> {
         return accounts.toList()
     }
 
@@ -22,7 +22,7 @@ open class Team(id: TeamID, name: Name) {
      * @param account
      * @return
      */
-    fun isPlayerJoined(account: Account): Boolean {
+    fun isAccountJoined(account: Account): Boolean {
         return accounts.contains(account)
     }
 
@@ -32,8 +32,8 @@ open class Team(id: TeamID, name: Name) {
      * @param account
      * @return
      */
-    fun joinPlayer(account: Account): Boolean {
-        if (isPlayerJoined(account)) return false
+    fun joinAccount(account: Account): Boolean {
+        if (isAccountJoined(account)) return false
         return accounts.add(account)
     }
 
@@ -43,8 +43,8 @@ open class Team(id: TeamID, name: Name) {
      * @param account
      * @return
      */
-    fun kickPlayer(account: Account): Boolean {
-        if (!isPlayerJoined(account)) return false
+    fun kickAccount(account: Account): Boolean {
+        if (!isAccountJoined(account)) return false
         return accounts.remove(account)
     }
 
