@@ -2,7 +2,7 @@ package jp.pmmper.breakersmc.team
 
 import org.bukkit.entity.Player
 
-class Team(id: TeamID, name: Name) {
+open class Team(id: TeamID, name: Name) {
     val id: TeamID = id
     val name: Name = name
     private val players = mutableListOf<Player>()
