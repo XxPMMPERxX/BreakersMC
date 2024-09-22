@@ -24,10 +24,8 @@ class Team(id: TeamID, name: Name) {
      * @return
      */
     fun joinPlayer(player: Player): Boolean {
-        if (!isPlayerJoined(player)) {
-            return players.add(player)
-        }
-        return false
+        if (isPlayerJoined(player)) return false
+        return players.add(player)
     }
 
     /**
@@ -37,9 +35,7 @@ class Team(id: TeamID, name: Name) {
      * @return
      */
     fun kickPlayer(player: Player): Boolean {
-        if (isPlayerJoined(player)) {
-            return players.remove(player)
-        }
-        return false
+        if (!isPlayerJoined(player)) return false
+        return players.remove(player)
     }
 }
