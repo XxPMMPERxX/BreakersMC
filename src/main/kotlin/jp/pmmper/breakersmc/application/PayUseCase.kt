@@ -7,7 +7,7 @@ import org.bukkit.Bukkit
 /**
  * 支払ユースケース
  */
-class PaidUseCase {
+class PayUseCase {
     fun execute(player: Player, amount: Money) {
         Bukkit.getPluginManager().callEvent(player.pay(amount))
     }
