@@ -18,7 +18,7 @@ class ChargedListener : Listener {
         // 請求元が金額を受け取れる状態にない または 請求先が支払える状態にない 場合は処理終了
         if (!from.canCredited(amount) || !to.canPay(amount)) return
 
-        // 請求先は支払う 請求元は受け取る
+        // 請求先は支払う 請求元は受け取る（ログ保存処理等はPaidListener/CreditedListenerに任せる）
         Bukkit.getPluginManager().callEvent(to.pay(amount))
         Bukkit.getPluginManager().callEvent(from.credited(amount))
     }
