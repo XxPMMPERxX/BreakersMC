@@ -1,4 +1,4 @@
-package jp.pmmper.breakersmc.account
+package jp.pmmper.breakersmc.model.player
 
 data class Money(val value: Int) {
     companion object {

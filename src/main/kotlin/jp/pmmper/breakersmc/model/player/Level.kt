@@ -1,4 +1,4 @@
-package jp.pmmper.breakersmc.account
+package jp.pmmper.breakersmc.model.player
 
 data class Level(val value: Double) {
     companion object {
