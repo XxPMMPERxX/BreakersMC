@@ -92,7 +92,7 @@
 | チーム     | team       | INTEGER UNSIGNED |    | teams.id          | ○  |        |     |       |                   |    |
 | 作成日     | created_at | DATETIME         |    |                   | ○  |        |     |       | CURRENT_TIMESTAMP |    |
 
-### destroy_core_histories(コア破壊履歴)
+### break_core_histories(コア破壊履歴)
 
 | 論理カラム名  | 物理カラム名     | 型                | PK | FK                | NN | UNIQUE | A_I | INDEX | DEFAULT           | 備考 |
 |---------|------------|------------------|:--:|-------------------|:--:|:------:|:---:|:-----:|-------------------|----|
