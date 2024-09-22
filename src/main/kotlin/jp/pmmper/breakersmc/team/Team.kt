@@ -8,6 +8,15 @@ class Team(id: TeamID, name: Name) {
     private val players = mutableListOf<Player>()
 
     /**
+     * 全プレイヤーを取得
+     *
+     * @return
+     */
+    fun getPlayers(): List<Player> {
+        return players.toList()
+    }
+
+    /**
      * プレイヤーがチームに参加しているか
      *
      * @param player
