@@ -1,8 +1,8 @@
 package jp.pmmper.breakersmc.model.player
 
-import jp.pmmper.breakersmc.model.player.event.Charged
-import jp.pmmper.breakersmc.model.player.event.Credited
-import jp.pmmper.breakersmc.model.player.event.Paid
+import jp.pmmper.breakersmc.model.player.event.PlayerCharged
+import jp.pmmper.breakersmc.model.player.event.PlayerCredited
+import jp.pmmper.breakersmc.model.player.event.PlayerPaid
 import java.util.*
 
 class Player(id: PlayerID, uuid: UUID, name: Name, money: Money, level: Level) {
@@ -21,8 +21,8 @@ class Player(id: PlayerID, uuid: UUID, name: Name, money: Money, level: Level) {
      * @param amount 金額
      * @return
      */
-    fun charge(to: Player, amount: Money): Charged {
-        return Charged(this, to, amount)
+    fun charge(to: Player, amount: Money): PlayerCharged {
+        return PlayerCharged(this, to, amount)
     }
 
     /**
@@ -30,10 +30,10 @@ class Player(id: PlayerID, uuid: UUID, name: Name, money: Money, level: Level) {
      *
      * @param amount
      */
-    fun credited(amount: Money): Credited {
+    fun credited(amount: Money): PlayerCredited {
         check(canCredited(amount))
         money = Money(money.value + amount.value)
-        return Credited(this, amount)
+        return PlayerCredited(this, amount)
     }
 
     /**
@@ -41,10 +41,10 @@ class Player(id: PlayerID, uuid: UUID, name: Name, money: Money, level: Level) {
      *
      * @param amount 金額
      */
-    fun pay(amount: Money): Paid {
+    fun pay(amount: Money): PlayerPaid {
         check(canPay(amount))
         money = Money(money.value - amount.value)
-        return Paid(this, amount)
+        return PlayerPaid(this, amount)
     }
 
     /**

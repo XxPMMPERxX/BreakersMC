@@ -1,6 +1,6 @@
 package jp.pmmper.breakersmc.application
 
-import jp.pmmper.breakersmc.model.player.event.Charged
+import jp.pmmper.breakersmc.model.player.event.PlayerCharged
 import org.bukkit.Bukkit
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -10,7 +10,7 @@ import org.bukkit.event.Listener
  */
 class ChargedListener : Listener {
     @EventHandler
-    fun listen(event: Charged) {
+    fun listen(event: PlayerCharged) {
         val from = event.from
         val to = event.to
         val amount = event.amount

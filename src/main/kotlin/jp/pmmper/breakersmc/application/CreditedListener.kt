@@ -1,6 +1,6 @@
 package jp.pmmper.breakersmc.application
 
-import jp.pmmper.breakersmc.model.player.event.Credited
+import jp.pmmper.breakersmc.model.player.event.PlayerCredited
 import org.bukkit.event.EventHandler
 
 /**
@@ -8,7 +8,7 @@ import org.bukkit.event.EventHandler
  */
 class CreditedListener {
     @EventHandler
-    fun listen(event: Credited) {
+    fun listen(event: PlayerCredited) {
         TODO("ログの保存")
     }
 }

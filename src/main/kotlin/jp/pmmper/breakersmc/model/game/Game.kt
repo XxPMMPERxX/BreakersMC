@@ -1,6 +1,6 @@
 package jp.pmmper.breakersmc.model.game
 
-import jp.pmmper.breakersmc.model.game.event.PhaseChanged
+import jp.pmmper.breakersmc.model.game.event.GamePhaseChanged
 import java.time.LocalDateTime
 
 abstract class Game(id: GameID) {
@@ -17,7 +17,7 @@ abstract class Game(id: GameID) {
      *
      * @return
      */
-    fun nextPhase(): PhaseChanged {
+    fun nextPhase(): GamePhaseChanged {
         val nextPhase = when (phase) {
             Phase.CLOSE -> Phase.RECRUITING
             Phase.RECRUITING -> Phase.PREPARE
@@ -27,6 +27,6 @@ abstract class Game(id: GameID) {
         }
 
         phase = nextPhase
-        return PhaseChanged(this, nextPhase)
+        return GamePhaseChanged(this, nextPhase)
     }
 }

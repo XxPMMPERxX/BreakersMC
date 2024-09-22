@@ -5,7 +5,7 @@ import jp.pmmper.breakersmc.model.player.Player
 import org.bukkit.event.Event
 import org.bukkit.event.HandlerList
 
-class Charged(val from: Player, val to: Player, val amount: Money) : Event() {
+class PlayerCharged(val from: Player, val to: Player, val amount: Money) : Event() {
     companion object {
         private val handlers = HandlerList()
 

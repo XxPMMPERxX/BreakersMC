@@ -1,11 +1,11 @@
-package jp.pmmper.breakersmc.model.game.event
+package jp.pmmper.breakersmc.model.player.event
 
-import jp.pmmper.breakersmc.model.game.Game
-import jp.pmmper.breakersmc.model.game.Phase
+import jp.pmmper.breakersmc.model.player.Money
+import jp.pmmper.breakersmc.model.player.Player
 import org.bukkit.event.Event
 import org.bukkit.event.HandlerList
 
-class PhaseChanged(val game: Game, val nextPhase: Phase) : Event() {
+class PlayerPaid(val player: Player, val amount: Money) : Event() {
     companion object {
         private val handlers = HandlerList()
 
