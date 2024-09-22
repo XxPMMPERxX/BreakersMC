@@ -1,59 +1,59 @@
 package jp.pmmper.breakersmc.team
 
-import org.bukkit.entity.Player
+import jp.pmmper.breakersmc.account.Account
 
 open class Team(id: TeamID, name: Name) {
     val id: TeamID = id
     val name: Name = name
-    private val players = mutableListOf<Player>()
+    private val accounts = mutableListOf<Account>()
 
     /**
-     * 全プレイヤーを取得
+     * 全アカウントを取得
      *
      * @return
      */
-    fun getPlayers(): List<Player> {
-        return players.toList()
+    fun getPlayers(): List<Account> {
+        return accounts.toList()
     }
 
     /**
-     * プレイヤーがチームに参加しているか
+     * アカウントがチームに参加しているか
      *
-     * @param player
+     * @param account
      * @return
      */
-    fun isPlayerJoined(player: Player): Boolean {
-        return players.contains(player)
+    fun isPlayerJoined(account: Account): Boolean {
+        return accounts.contains(account)
     }
 
     /**
-     * プレイヤーを参加させる
+     * チームにアカウントを参加させる
      *
-     * @param player
+     * @param account
      * @return
      */
-    fun joinPlayer(player: Player): Boolean {
-        if (isPlayerJoined(player)) return false
-        return players.add(player)
+    fun joinPlayer(account: Account): Boolean {
+        if (isPlayerJoined(account)) return false
+        return accounts.add(account)
     }
 
     /**
-     * プレイヤーを退出させる
+     * チームからアカウントを退出させる
      *
-     * @param player
+     * @param account
      * @return
      */
-    fun kickPlayer(player: Player): Boolean {
-        if (!isPlayerJoined(player)) return false
-        return players.remove(player)
+    fun kickPlayer(account: Account): Boolean {
+        if (!isPlayerJoined(account)) return false
+        return accounts.remove(account)
     }
 
     /**
-     * プレイヤー数を取得
+     * チームのアカウント数を取得
      *
      * @return
      */
     fun count(): Int {
-        return players.count()
+        return accounts.count()
     }
 }
