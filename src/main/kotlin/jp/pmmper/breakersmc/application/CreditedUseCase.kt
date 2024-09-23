@@ -10,9 +10,9 @@ import org.bukkit.Bukkit
 class CreditedUseCase {
     fun execute(player: Player, amount: Money) {
         Bukkit.getPluginManager().callEvent(player.credited(amount))
-        // 仮にプレイヤーの所持金を保持するテーブルがあるならここで呼び出す。下のような具合で
+        // 従来ならplayerRepositoryみたいなのでplayerを保存する。以下のような具合で
         // 今回はログありきのシステムなのでしないけど
-        // val moneyRepository: MoneyRepository
-        // moneyRepository.store(player.money)
+        // val playerRepository: PlayerRepository
+        // playerRepository.store(player)
     }
 }
