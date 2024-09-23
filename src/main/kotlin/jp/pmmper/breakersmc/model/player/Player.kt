@@ -59,4 +59,14 @@ class Player(id: PlayerID, uuid: UUID, name: Name, money: Money, level: Level) {
         money = Money(money.value - amount.value)
         return PlayerPaid(this, amount)
     }
+
+    /**
+     * お金を支払えるか
+     *
+     * @param amount
+     * @return
+     */
+    fun canPay(amount: Money): Boolean {
+        return runCatching { Money(money.value - amount.value) }.isSuccess
+    }
 }
