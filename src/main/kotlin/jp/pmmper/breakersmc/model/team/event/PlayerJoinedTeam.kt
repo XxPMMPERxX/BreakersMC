@@ -5,7 +5,7 @@ import jp.pmmper.breakersmc.model.team.Team
 import org.bukkit.event.Event
 import org.bukkit.event.HandlerList
 
-class PlayerJoined(val player: Player, val team: Team) : Event() {
+class PlayerJoinedTeam(val player: Player, val team: Team) : Event() {
     companion object {
         private val handlers = HandlerList()
 

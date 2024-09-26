@@ -1,12 +1,12 @@
 package jp.pmmper.breakersmc.application
 
-import jp.pmmper.breakersmc.model.team.event.PlayerJoined
+import jp.pmmper.breakersmc.model.team.event.PlayerJoinedTeam
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 
 class PlayerJoinedTeamListener : Listener {
     @EventHandler
-    fun listen(event: PlayerJoined) {
+    fun listen(event: PlayerJoinedTeam) {
         TODO("ログの保存")
     }
 }
