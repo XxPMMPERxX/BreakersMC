@@ -1,9 +1,7 @@
 package jp.pmmper.breakersmc.model.player
 
-import jp.pmmper.breakersmc.model.player.event.PlayerCharged
-import jp.pmmper.breakersmc.model.player.event.PlayerCredited
-import jp.pmmper.breakersmc.model.player.event.PlayerNameChanged
-import jp.pmmper.breakersmc.model.player.event.PlayerPaid
+import jp.pmmper.breakersmc.model.game.Game
+import jp.pmmper.breakersmc.model.player.event.*
 import java.util.*
 
 class Player(id: PlayerID, uuid: UUID, name: Name, money: Money, level: Level) {
@@ -68,5 +66,17 @@ class Player(id: PlayerID, uuid: UUID, name: Name, money: Money, level: Level) {
      */
     fun canPay(amount: Money): Boolean {
         return runCatching { Money(money.value - amount.value) }.isSuccess
+    }
+
+    /**
+     * 死
+     *
+     * @param game
+     * @param message
+     * @param killer
+     * @return
+     */
+    fun die(game: Game, message: String, killer: Player?): PlayerDied {
+        return PlayerDied(this, game, message, killer)
     }
 }
