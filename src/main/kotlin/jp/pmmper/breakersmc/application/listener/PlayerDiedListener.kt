@@ -1,4 +1,4 @@
-package jp.pmmper.breakersmc.application
+package jp.pmmper.breakersmc.application.listener
 
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener

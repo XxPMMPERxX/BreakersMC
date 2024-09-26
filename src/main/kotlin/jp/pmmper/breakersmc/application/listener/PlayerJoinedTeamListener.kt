@@ -1,4 +1,4 @@
-package jp.pmmper.breakersmc.application
+package jp.pmmper.breakersmc.application.listener
 
 import jp.pmmper.breakersmc.model.team.event.PlayerJoinedTeam
 import org.bukkit.event.EventHandler

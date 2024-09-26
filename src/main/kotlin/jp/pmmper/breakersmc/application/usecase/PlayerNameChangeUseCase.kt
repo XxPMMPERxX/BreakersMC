@@ -1,4 +1,4 @@
-package jp.pmmper.breakersmc.application
+package jp.pmmper.breakersmc.application.usecase
 
 import jp.pmmper.breakersmc.model.player.Name
 import jp.pmmper.breakersmc.model.player.Player
