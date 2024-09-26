@@ -38,15 +38,4 @@ open class Team(id: TeamID, name: Name) {
         players.add(player)
         return PlayerJoinedTeam(player, this)
     }
-
-    /**
-     * プレイヤーを参加させる
-     *
-     * @param player
-     * @return
-     */
-    fun joinPlayer(player: Player): PlayerJoinedTeam {
-        check(!isPlayerJoined(player))
-        return PlayerJoinedTeam(player, this)
-    }
 }
