@@ -90,4 +90,14 @@ class Player(id: PlayerID, uuid: UUID, name: Name, money: Money, level: Level) {
     fun requestToJoinTeam(team: Team): PlayerRequestedToJoinTeam {
         return PlayerRequestedToJoinTeam(this, team)
     }
+
+    /**
+     * 経験値上昇
+     *
+     * @param amount
+     */
+    fun gainExperience(amount: Experience): PlayerGainedExperience {
+        level = runCatching { Level(level.value + amount.value) }.getOrDefault(Level(Level.MAX_VALUE))
+        return PlayerGainedExperience(this, amount)
+    }
 }
