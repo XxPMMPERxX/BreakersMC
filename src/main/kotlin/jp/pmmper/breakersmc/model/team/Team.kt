@@ -1,6 +1,7 @@
 package jp.pmmper.breakersmc.model.team
 
 import jp.pmmper.breakersmc.model.player.Player
+import jp.pmmper.breakersmc.model.player.event.PlayerRequestedToJoinTeam
 import jp.pmmper.breakersmc.model.team.event.PlayerJoinedTeam
 
 open class Team(id: TeamID, name: Name) {
@@ -30,12 +31,18 @@ open class Team(id: TeamID, name: Name) {
     /**
      * プレイヤーの参加リクエストに応答する
      *
-     * @param player
+     * @param request
      * @return 参加できない場合はnull
      */
-    fun respondJoinRequest(player: Player): PlayerJoinedTeam? {
+    fun respondJoinRequest(request: PlayerRequestedToJoinTeam): PlayerJoinedTeam? {
+        val player = request.player
+
         if (isPlayerJoined(player)) return null
         players.add(player)
         return PlayerJoinedTeam(player, this)
+    }
+
+    fun count(): Int {
+        return players.count()
     }
 }

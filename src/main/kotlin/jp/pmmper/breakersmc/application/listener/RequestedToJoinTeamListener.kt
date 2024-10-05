@@ -8,7 +8,7 @@ import org.bukkit.event.Listener
 class RequestedToJoinTeamListener : Listener {
     @EventHandler
     fun listen(event: PlayerRequestedToJoinTeam) {
-        val event = event.team.respondJoinRequest(event.player) ?: return
-        Bukkit.getPluginManager().callEvent(event)
+        val result = event.team.respondJoinRequest(event) ?: return
+        Bukkit.getPluginManager().callEvent(result)
     }
 }

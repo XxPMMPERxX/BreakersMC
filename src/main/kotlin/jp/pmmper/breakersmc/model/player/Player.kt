@@ -1,6 +1,7 @@
 package jp.pmmper.breakersmc.model.player
 
 import jp.pmmper.breakersmc.model.game.Game
+import jp.pmmper.breakersmc.model.game.event.PlayerJoinedGame
 import jp.pmmper.breakersmc.model.player.event.*
 import jp.pmmper.breakersmc.model.team.Team
 import java.util.*
@@ -89,6 +90,16 @@ class Player(id: PlayerID, uuid: UUID, name: Name, money: Money, level: Level) {
      */
     fun requestToJoinTeam(team: Team): PlayerRequestedToJoinTeam {
         return PlayerRequestedToJoinTeam(this, team)
+    }
+
+    /**
+     * ゲームに参加リスエストを送る
+     *
+     * @param game
+     * @return
+     */
+    fun requestToJoinGame(game: Game): PlayerRequestedToJoinGame {
+        return PlayerRequestedToJoinGame(this, game)
     }
 
     /**
